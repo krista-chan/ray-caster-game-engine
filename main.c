@@ -9,7 +9,7 @@
 
 float playerX, playerY, playerDeltaX, playerDeltaY, playerAngle; //player shit
 
-void drawPlayer()
+void drawPlayer() //self explanitory
 {
 	glColor3f(1, 1, 0);
 	glPointSize(8);
@@ -26,6 +26,8 @@ void drawPlayer()
 
 int mapX = 8, mapY = 8, mapS = 64;
 
+//map is an 8x8 grid array thing, 0 is no wall and 1 is wall
+
 int map[] = 
 {
 	1, 1, 1, 1, 1, 1, 1, 1,
@@ -38,7 +40,7 @@ int map[] =
 	1, 1, 1, 1, 1, 1, 1, 1,
 };
 
-void drawMap2D()
+void drawMap2D() // draw the map with gridlines
 {
 	int x, y, xo, yo;
 	for(y = 0; y < mapY; y++)
@@ -57,12 +59,12 @@ void drawMap2D()
 	}
 }
 
-float dist(float angleX, float angleY, float bX, float bY, float angle)
+float dist(float angleX, float angleY, float bX, float bY, float angle) //for distance calculations
 {
 	return( sqrt((bX - angleX) * (bX - angleX) + (bY - angleY) * (bY - angleY)));
 }
 
-void drawRays3D()
+void drawRays3D() // render the rays to the screen
 {
 	int r, mX, mY, mP, dof; float rayX, rayY, rayAngle, xOffset, yOffset, disT;
 	
@@ -180,7 +182,7 @@ void drawRays3D()
 	}
 }
 
-void display()
+void display() // take a wild guess
 {
  glClear(GL_COLOR_BUFFER_BIT);
  drawMap2D();
@@ -189,7 +191,7 @@ void display()
  glutSwapBuffers();
 };
 
-void buttons(unsigned char key, int x, int y)
+void buttons(unsigned char key, int x, int y) //input keys and movement
 {
 	if (key == 'a') { playerAngle -= 0.1; if(playerAngle < 0) { playerAngle += 2 * PI; } playerDeltaX = cos(playerAngle) * 5; playerDeltaY = sin(playerAngle) * 5; }
 	if (key == 'd') { playerAngle += 0.1; if(playerAngle > 2 * PI) { playerAngle -= 2 * PI; } playerDeltaX = cos(playerAngle) * 5; playerDeltaY = sin(playerAngle) * 5; }
@@ -198,14 +200,14 @@ void buttons(unsigned char key, int x, int y)
 	glutPostRedisplay();
 }
 
-void init()
+void init() // look at that window (1)
 {
 	glClearColor(0.3, 0.3, 0.3,0);
 	gluOrtho2D(0, 1024, 512, 0);
 	playerX = 300; playerY = 300; playerDeltaX = cos(playerAngle) * 5; playerDeltaY = sin(playerAngle) * 5;
 }
 
-int main(int argc, char** argv)
+int main(int argc, char** argv) // look at that better window
 { 
  glutInit(&argc, argv);
  glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
