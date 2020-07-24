@@ -9,7 +9,7 @@
 
 float playerX, playerY, playerDeltaX, playerDeltaY, playerAngle; //player shit
 
-void drawPlayer() //self explanitory
+void drawPlayer() // self explanitory
 {
 	glColor3f(1, 1, 0);
 	glPointSize(8);
